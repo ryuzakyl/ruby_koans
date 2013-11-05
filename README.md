@@ -1,4 +1,4 @@
 ruby_koans
 ==========
 
-This is ruby koans project
+This is my ruby koans project

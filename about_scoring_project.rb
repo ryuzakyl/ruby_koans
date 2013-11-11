@@ -31,6 +31,35 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   # You need to write this method
+  
+  # counting occurrences in the set of dices
+  occurrences = Hash.new(0)
+  for value in dice do
+    occurrences[value] += 1
+  end
+
+  # applying game rules
+  total = 0
+
+  # handling one's special case
+  ones_count = occurrences[1]
+  total += (ones_count / 3) * 1000
+  total += (ones_count % 3) * 100
+
+  # handling five's special case
+  fives_count = occurrences[5]
+  total += (fives_count / 3) * 500
+  total += (fives_count % 3) * 50
+
+  # handling the rest of the cases
+  for value in [2, 3, 4, 6] do
+    # adding additional contributions
+    if occurrences[value] == 3 then
+      total += value * 100
+    end
+  end
+
+  return total
 end
 
 class AboutScoringProject < Neo::Koan
